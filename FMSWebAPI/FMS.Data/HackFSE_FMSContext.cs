@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace FMSWebAPI.Models
+namespace FMSWebAPI.Data
 {
     public partial class HackFSE_FMSContext : DbContext
     {
@@ -14,8 +14,7 @@ namespace FMSWebAPI.Models
             : base(options)
         {
         }
-
-        public virtual DbSet<EmployeeDetails> EmployeeDetails { get; set; }
+        
         public virtual DbSet<EventPocdetails> EventPocdetails { get; set; }
         public virtual DbSet<EventVolunteerDetails> EventVolunteerDetails { get; set; }
         public virtual DbSet<OutreachEvent> OutreachEvent { get; set; }
@@ -33,8 +32,7 @@ namespace FMSWebAPI.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
-            modelBuilder.ApplyConfiguration(new EmployeeDetailsMap());
+            
             modelBuilder.ApplyConfiguration(new EventPocdetailsMap());
             modelBuilder.ApplyConfiguration(new EventVolunteerDetailsMap());
             modelBuilder.ApplyConfiguration(new OutreachEventMap());

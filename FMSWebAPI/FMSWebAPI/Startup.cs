@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FMS.Data.Repository;
+using FMS.Orchestration;
+using FMS.Orchestration.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +22,7 @@ namespace FMSWebAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -25,7 +30,13 @@ namespace FMSWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<ICommunicationOrchestration, CommunicationOrchestration>();
+
+            services.AddScoped<IFileRepository, FileRepository>();
+
+            services.AddMvc((options) => {
+                
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +52,32 @@ namespace FMSWebAPI
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseCustomMiddleware();//todo:Added For Debug purpose.Removed Later
+
+            app.UseMvc((routes)=> { routes.MapRoute("default", "api/{controller=values}/{action}/{id?}"); });
+
         }
     }
+    public class MyMiddleWare
+    {
+        private readonly RequestDelegate _next;
+
+        public MyMiddleWare(RequestDelegate next)
+        {
+            _next = next;
+        }
+        public async Task Invoke(HttpContext httpContext)
+        {
+
+            await _next.Invoke(httpContext);
+        }
+    }
+
+    public static class APIExtensions
+    {
+        public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder applicationBuilder) => applicationBuilder.UseMiddleware<MyMiddleWare>();
+    }
+
+
+
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace FMSWebAPI.Models
+namespace FMSWebAPI.Data
 {
     public partial class EventVolunteerDetailsMap : IEntityTypeConfiguration<EventVolunteerDetails>
     {        
@@ -20,11 +20,16 @@ namespace FMSWebAPI.Models
                 .HasName("IX_EventEmployeeDetails_ParticipationStatusID");
 
             builder.Property(e => e.EventVolunteerDetailsId)
-                .HasColumnName("EventVolunteerDetailsID")
-                .ValueGeneratedNever();
+                .HasColumnName("EventVolunteerDetailsID");
+                //.ValueGeneratedNever();
 
             builder.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
+            builder.Property(e => e.EmployeeName).HasColumnName("EmployeeName");
+
+            builder.Property(e => e.BusinessUnit).HasColumnName("BusinessUnit");
+
+            builder.Property(e => e.EmployeeContactNumber).HasColumnName("EmployeeContactNumber");
             builder.Property(e => e.EventId)
                 .IsRequired()
                 .HasColumnName("EventID")
@@ -40,13 +45,7 @@ namespace FMSWebAPI.Models
 
             builder.Property(e => e.TravelHours).HasColumnType("decimal(18, 0)");
 
-            builder.Property(e => e.VolunteerHours).HasColumnType("decimal(18, 0)");
-
-            builder.HasOne(d => d.Employee)
-                .WithMany(p => p.EventVolunteerDetails)
-                .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EventEmployeeDetails_EmployeeDetails");
+            builder.Property(e => e.VolunteerHours).HasColumnType("decimal(18, 0)");            
 
             builder.HasOne(d => d.Event)
                 .WithMany(p => p.EventVolunteerDetails)

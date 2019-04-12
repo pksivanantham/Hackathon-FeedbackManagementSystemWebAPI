@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace FMSWebAPI.Models
+namespace FMSWebAPI.Data
 {
     public partial class ParticipationStatusMap : IEntityTypeConfiguration<ParticipationStatus>
     {

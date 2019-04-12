@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace FMSWebAPI.Data
+namespace FMS.ServiceClient
 {
-    public partial class OutreachEvent
+    public class OutreachEventRequest
     {
-        public OutreachEvent()
-        {
-            EventPocdetails = new HashSet<EventPocdetails>();
-            EventVolunteerDetails = new HashSet<EventVolunteerDetails>();
-        }
-
+     
         public string EventId { get; set; }
         public string EventName { get; set; }
         public string EventDescription { get; set; }
@@ -23,7 +19,6 @@ namespace FMSWebAPI.Data
         public string Category { get; set; }
         public decimal LivesImpacted { get; set; }
 
-        public ICollection<EventPocdetails> EventPocdetails { get; set; }
-        public ICollection<EventVolunteerDetails> EventVolunteerDetails { get; set; }
+        
     }
 }

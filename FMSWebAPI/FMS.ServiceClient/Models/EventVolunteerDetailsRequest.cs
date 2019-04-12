@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FMSWebAPI.Data
+﻿namespace FMS.ServiceClient
 {
-    public partial class EventVolunteerDetails
+    public class EventVolunteerDetailsRequest
     {
         public int EventVolunteerDetailsId { get; set; }
         public string EventId { get; set; }
@@ -16,8 +13,10 @@ namespace FMSWebAPI.Data
         public string Status { get; set; }
         public bool IsMailSend { get; set; }
         public int MailSendCount { get; set; }
-        public int ParticipationStatusId { get; set; }        
-        public OutreachEvent Event { get; set; }
-        public ParticipationStatus ParticipationStatus { get; set; }
+        public int ParticipationStatusId { get; set; }
+
+        public OutreachEventRequest Event { get; set; }
+
+
     }
 }

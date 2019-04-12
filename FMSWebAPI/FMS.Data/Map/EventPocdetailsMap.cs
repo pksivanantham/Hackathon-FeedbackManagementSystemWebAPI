@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace FMSWebAPI.Models
+namespace FMSWebAPI.Data
 {
     public partial class EventPocdetailsMap : IEntityTypeConfiguration<EventPocdetails>
     {
@@ -17,22 +17,21 @@ namespace FMSWebAPI.Models
             builder.HasIndex(e => e.EventId);
 
             builder.Property(e => e.EventPocdetailsId)
-                    .HasColumnName("EventPOCDetailsID")
-                    .ValueGeneratedNever();
+                    .HasColumnName("EventPOCDetailsID");
+                   // .ValueGeneratedNever();
 
             builder.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+            builder.Property(e => e.EmployeeName).HasColumnName("EmployeeName");
+
+            builder.Property(e => e.EmployeeContactNumber).HasColumnName("EmployeeContactNumber");
 
             builder.Property(e => e.EventId)
                     .IsRequired()
                     .HasColumnName("EventID")
                     .HasMaxLength(10)
                     .IsUnicode(false);
-
-            builder.HasOne(d => d.Employee)
-                    .WithMany(p => p.EventPocdetails)
-                    .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EventPOCDetails_EmployeeDetails");
+            
 
             builder.HasOne(d => d.Event)
                     .WithMany(p => p.EventPocdetails)

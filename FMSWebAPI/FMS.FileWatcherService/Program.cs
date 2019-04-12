@@ -14,12 +14,22 @@ namespace FMS.FileWatcherService
         /// </summary>
         static void Main()
         {
+            
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new FileWatcherService()
             };
+#if DEBUG            
+            FileWatcherService fileWatcherService = new FileWatcherService();
+            fileWatcherService.OnDebug();
+            System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+
+
+#else
             ServiceBase.Run(ServicesToRun);
+#endif
+            
         }
     }
 }

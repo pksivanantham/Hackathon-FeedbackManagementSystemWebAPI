@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace FMSWebAPI.Models
+namespace FMSWebAPI.Data
 {
     public partial class OutreachEventMap : IEntityTypeConfiguration<OutreachEvent>
     {
@@ -22,8 +22,7 @@ namespace FMSWebAPI.Models
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.BeneficiaryAddress)
-                .IsRequired()
+            builder.Property(e => e.BeneficiaryAddress)                
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
@@ -32,8 +31,7 @@ namespace FMSWebAPI.Models
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Category)
-                .IsRequired()
+            builder.Property(e => e.Category)                
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
@@ -54,8 +52,7 @@ namespace FMSWebAPI.Models
 
             builder.Property(e => e.LivesImpacted).HasColumnType("decimal(18, 0)");
 
-            builder.Property(e => e.ProjectName)
-                .IsRequired()
+            builder.Property(e => e.ProjectName)                
                 .HasMaxLength(100)
                 .IsUnicode(false);
         }
