@@ -1,1 +1,1 @@
-Scaffold-DbContext "SERVER=DOTNET;Database=HackFSE_FMS;Trusted_Connection=true" Microsoft.EntityframeworkCore.SqlServer -OutputDir Models
+# Web API Project based Asp .Net Core 2.2.X
