@@ -26,6 +26,9 @@ namespace FMS.Data.Repository
                     _hackFSE_FMSContext.OutreachEvent.Add(eventInfo);
                     _hackFSE_FMSContext.SaveChanges();
                 }
+                //If updates
+                //_hackFSE_FMSContext.Entry(_hackFSE_FMSContext.OutreachEvent.Find(eventInfo.EventId)).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
             }
         }
 
